@@ -11,10 +11,12 @@
   <!-- ═══════════════════════════════════════════════
        PAGE 1 – LANDING PAGE
   ═══════════════════════════════════════════════ -->
-  <div id="landing-page" class="page active">
-    <div class="landing-bg"></div>
+  <section id="landing-page" class="landing">
+    <div class="landing-bg">
+      <div class="rain-container" id="rainContainer"></div>
+    </div>
     <div class="landing-content">
-      <div class="landing-badge">Simulation Mode: ON &nbsp;|&nbsp; Frontend Prototype</div>
+      <div class="landing-badge">Simulation Mode: ON</div>
       <div class="landing-icon">🌧️</div>
       <h1 class="landing-title">Urban Flood Nowcasting System</h1>
       <p class="landing-tagline">"Predict flood risk before water becomes a crisis."</p>
@@ -22,351 +24,317 @@
         <span class="tag">Drainage + Rainfall Coupling</span>
         <span class="tag">Team TECHX</span>
       </div>
-      <p class="landing-desc">
-        This prototype combines rainfall intensity, drainage capacity and zone-level
-        conditions to provide an easy-to-understand urban flood risk assessment.
+      <p class="landing-description">
+        This prototype combines rainfall intensity, drainage capacity and zone-level conditions
+        to provide an easy-to-understand urban flood risk assessment.
       </p>
-      <button class="btn-primary" id="go-dashboard">VIEW DASHBOARD →</button>
+      <button class="btn-cta" id="enterDashboard">VIEW DASHBOARD</button>
     </div>
-  </div>
+  </section>
 
   <!-- ═══════════════════════════════════════════════
-       PAGE 2 – MAIN DASHBOARD
+       PAGE 2 – DASHBOARD
   ═══════════════════════════════════════════════ -->
-  <div id="dashboard-page" class="page">
+  <section id="dashboard-page" class="dashboard hidden">
 
-    <!-- TOP NAV -->
+    <!-- NAV BAR -->
     <nav class="navbar">
       <div class="nav-brand">
-        <span class="nav-icon">🌧️</span>
+        <span class="nav-icon">🌊</span>
         <span class="nav-title">Urban Flood Nowcasting System</span>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#dashboard-section" class="nav-link active">Dashboard</a></li>
-        <li><a href="#alerts-section" class="nav-link">Alerts</a></li>
-        <li><a href="#about-section" class="nav-link">About</a></li>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">&#9776;</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" class="active">Dashboard</a></li>
+        <li><a href="#alerts-section">Alerts</a></li>
+        <li><a href="#about-section">About</a></li>
         <li><span class="nav-team">Team TECHX</span></li>
       </ul>
     </nav>
 
     <!-- DASHBOARD HEADER -->
-    <div class="dash-header" id="dashboard-section">
-      <div class="dash-title-block">
+    <header class="dash-header">
+      <div>
         <h2 class="dash-title">Urban Flood Risk Dashboard</h2>
-        <span class="status-dot">● System Monitoring Active</span>
+        <p class="dash-subtitle">Drainage and Rainfall Coupling for Real-Time Urban Flood Risk Monitoring</p>
       </div>
-      <div class="dash-meta">
-        <span class="sim-badge">🔵 Simulation Mode: ON</span>
-        <span class="last-updated">Last Updated: <span id="last-updated-time">Just now</span></span>
+      <div class="status-group">
+        <span class="status-dot"></span>
+        <span class="status-text">System Monitoring Active</span>
+        <span class="sim-badge">Simulation Mode: ON</span>
       </div>
-    </div>
+    </header>
 
-    <!-- HOW IT WORKS STRIP -->
-    <div class="how-it-works">
-      <span class="how-label">How it works:</span>
-      <span class="how-step">🌧️ Rainfall</span>
-      <span class="how-arrow">→</span>
-      <span class="how-step">🚰 Drainage Load</span>
-      <span class="how-arrow">→</span>
-      <span class="how-step">⚠️ Flood Risk</span>
-      <span class="how-arrow">→</span>
-      <span class="how-step">🔔 Alert</span>
-      <span class="how-arrow">→</span>
-      <span class="how-step">🗺️ Recommended Action</span>
-    </div>
+    <main class="dash-main">
 
-    <!-- MAIN CONTENT GRID -->
-    <div class="main-grid">
+      <!-- HOW IT WORKS BANNER -->
+      <div class="how-it-works">
+        <span class="hiw-label">How it works:</span>
+        <div class="hiw-flow">
+          <span class="hiw-step">🌧️ Rainfall</span>
+          <span class="hiw-arrow">→</span>
+          <span class="hiw-step">🚿 Drainage Load</span>
+          <span class="hiw-arrow">→</span>
+          <span class="hiw-step">⚠️ Flood Risk</span>
+          <span class="hiw-arrow">→</span>
+          <span class="hiw-step">🔔 Alert</span>
+          <span class="hiw-arrow">→</span>
+          <span class="hiw-step">🏃 Recommended Action</span>
+        </div>
+      </div>
 
-      <!-- LEFT: MAP + CONTROLS -->
-      <div class="left-panel">
+      <!-- CONTROLS ROW -->
+      <div class="controls-row">
 
         <!-- RAINFALL SLIDER -->
-        <div class="slider-card">
-          <div class="slider-header">
-            <span class="slider-label">🌧️ Rainfall Intensity</span>
-            <span class="slider-value" id="rainfall-display">40 mm/hr</span>
+        <div class="control-card rainfall-control">
+          <div class="control-header">
+            <h3>🌧️ Rainfall Intensity</h3>
+            <span class="sim-tag">Simulated Data</span>
           </div>
-          <div class="slider-track-wrap">
+          <div class="slider-row">
             <span class="slider-min">0 mm/hr</span>
-            <input type="range" id="rainfall-slider" min="0" max="150" value="40" step="1" class="rainfall-slider" />
+            <input type="range" id="rainfallSlider" min="0" max="150" value="40" step="1" class="rainfall-slider" />
             <span class="slider-max">150 mm/hr</span>
           </div>
-          <div class="slider-levels">
-            <span class="lvl-low">Low</span>
-            <span class="lvl-mod">Moderate</span>
-            <span class="lvl-high">Heavy</span>
-            <span class="lvl-crit">Extreme</span>
+          <div class="slider-value-row">
+            <span>Current Rainfall: <strong id="rainfallValue">40</strong> mm/hr</span>
+            <button class="btn-reset" id="resetBtn">↺ RESET SIMULATION</button>
           </div>
-          <div class="drainage-coupling">
-            <span class="coupling-label">Rain + Drainage = Flood Risk</span>
-            <div class="coupling-bars">
-              <div class="cb-item">
-                <span>Rainfall Factor</span>
-                <div class="cb-bar"><div class="cb-fill rf-fill" id="rf-bar"></div></div>
-                <span id="rf-pct">27%</span>
-              </div>
-              <div class="cb-item">
-                <span>Drainage Load</span>
-                <div class="cb-bar"><div class="cb-fill dl-fill" id="dl-bar"></div></div>
-                <span id="dl-pct">42%</span>
-              </div>
-            </div>
-          </div>
-          <button class="btn-reset" id="reset-btn">↺ RESET SIMULATION</button>
+          <div class="last-updated">Last Updated: <span id="lastUpdated">Just now</span></div>
         </div>
-
-        <!-- SVG MAP -->
-        <div class="map-card">
-          <div class="map-header">
-            <span class="map-title">📍 Urban Zone Risk Map – Ahmedabad</span>
-            <div class="map-legend">
-              <span class="leg low">🟢 Low</span>
-              <span class="leg mod">🟡 Moderate</span>
-              <span class="leg high">🟠 High</span>
-              <span class="leg crit">🔴 Critical</span>
-            </div>
-          </div>
-          <div class="map-container">
-            <svg id="city-map" viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg">
-
-              <!-- Background -->
-              <rect width="700" height="480" fill="#1a2a3a" rx="8"/>
-
-              <!-- River -->
-              <path d="M0,200 Q100,180 200,210 Q300,240 400,220 Q500,200 700,215"
-                    stroke="#2e86de" stroke-width="18" fill="none" opacity="0.6" stroke-linecap="round"/>
-              <path d="M0,200 Q100,180 200,210 Q300,240 400,220 Q500,200 700,215"
-                    stroke="#74b9ff" stroke-width="6" fill="none" opacity="0.4" stroke-linecap="round"/>
-              <text x="180" y="198" fill="#74b9ff" font-size="10" font-family="sans-serif" opacity="0.8">Sabarmati River</text>
-
-              <!-- Drainage channels -->
-              <line x1="100" y1="0" x2="120" y2="480" stroke="#0984e3" stroke-width="3" opacity="0.35" stroke-dasharray="6,4"/>
-              <line x1="350" y1="0" x2="360" y2="480" stroke="#0984e3" stroke-width="3" opacity="0.35" stroke-dasharray="6,4"/>
-              <line x1="0" y1="310" x2="700" y2="320" stroke="#0984e3" stroke-width="3" opacity="0.35" stroke-dasharray="6,4"/>
-
-              <!-- Roads -->
-              <line x1="0" y1="150" x2="700" y2="150" stroke="#546e7a" stroke-width="4" opacity="0.6"/>
-              <line x1="0" y1="350" x2="700" y2="350" stroke="#546e7a" stroke-width="4" opacity="0.6"/>
-              <line x1="230" y1="0" x2="230" y2="480" stroke="#546e7a" stroke-width="4" opacity="0.6"/>
-              <line x1="500" y1="0" x2="500" y2="480" stroke="#546e7a" stroke-width="4" opacity="0.6"/>
-
-              <!-- Road labels -->
-              <text x="10" y="145" fill="#90a4ae" font-size="9" font-family="sans-serif">Main Road</text>
-              <text x="10" y="345" fill="#90a4ae" font-size="9" font-family="sans-serif">Ring Road</text>
-              <text x="232" y="20" fill="#90a4ae" font-size="9" font-family="sans-serif" writing-mode="tb">Central Ave</text>
-              <text x="502" y="20" fill="#90a4ae" font-size="9" font-family="sans-serif" writing-mode="tb">East Blvd</text>
-
-              <!-- ZONE A – Ahmedabad Central -->
-              <rect id="zone-A" class="map-zone" x="130" y="155" width="200" height="140"
-                    rx="6" data-zone="A" cursor="pointer"/>
-              <text x="230" y="215" text-anchor="middle" fill="white" font-size="13" font-weight="bold"
-                    font-family="sans-serif" pointer-events="none">Zone A</text>
-              <text x="230" y="232" text-anchor="middle" fill="white" font-size="10"
-                    font-family="sans-serif" pointer-events="none">Ahmedabad Central</text>
-              <text id="zone-A-pct" x="230" y="252" text-anchor="middle" fill="white" font-size="12"
-                    font-family="sans-serif" pointer-events="none" font-weight="bold">48%</text>
-
-              <!-- ZONE B – Riverfront -->
-              <rect id="zone-B" class="map-zone" x="130" y="60" width="200" height="90"
-                    rx="6" data-zone="B" cursor="pointer"/>
-              <text x="230" y="98" text-anchor="middle" fill="white" font-size="13" font-weight="bold"
-                    font-family="sans-serif" pointer-events="none">Zone B</text>
-              <text x="230" y="114" text-anchor="middle" fill="white" font-size="10"
-                    font-family="sans-serif" pointer-events="none">Riverfront</text>
-              <text id="zone-B-pct" x="230" y="134" text-anchor="middle" fill="white" font-size="12"
-                    font-family="sans-serif" pointer-events="none" font-weight="bold">55%</text>
-
-              <!-- ZONE C – East Zone -->
-              <rect id="zone-C" class="map-zone" x="510" y="155" width="185" height="140"
-                    rx="6" data-zone="C" cursor="pointer"/>
-              <text x="603" y="215" text-anchor="middle" fill="white" font-size="13" font-weight="bold"
-                    font-family="sans-serif" pointer-events="none">Zone C</text>
-              <text x="603" y="232" text-anchor="middle" fill="white" font-size="10"
-                    font-family="sans-serif" pointer-events="none">East Zone</text>
-              <text id="zone-C-pct" x="603" y="252" text-anchor="middle" fill="white" font-size="12"
-                    font-family="sans-serif" pointer-events="none" font-weight="bold">62%</text>
-
-              <!-- ZONE D – West Zone -->
-              <rect id="zone-D" class="map-zone" x="5" y="155" width="120" height="140"
-                    rx="6" data-zone="D" cursor="pointer"/>
-              <text x="65" y="215" text-anchor="middle" fill="white" font-size="13" font-weight="bold"
-                    font-family="sans-serif" pointer-events="none">Zone D</text>
-              <text x="65" y="232" text-anchor="middle" fill="white" font-size="10"
-                    font-family="sans-serif" pointer-events="none">West Zone</text>
-              <text id="zone-D-pct" x="65" y="252" text-anchor="middle" fill="white" font-size="12"
-                    font-family="sans-serif" pointer-events="none" font-weight="bold">38%</text>
-
-              <!-- ZONE E – Low-Lying Area -->
-              <rect id="zone-E" class="map-zone" x="130" y="355" width="370" height="120"
-                    rx="6" data-zone="E" cursor="pointer"/>
-              <text x="315" y="408" text-anchor="middle" fill="white" font-size="13" font-weight="bold"
-                    font-family="sans-serif" pointer-events="none">Zone E</text>
-              <text x="315" y="425" text-anchor="middle" fill="white" font-size="10"
-                    font-family="sans-serif" pointer-events="none">Low-Lying Area</text>
-              <text id="zone-E-pct" x="315" y="445" text-anchor="middle" fill="white" font-size="12"
-                    font-family="sans-serif" pointer-events="none" font-weight="bold">70%</text>
-
-              <!-- ZONE F – Industrial Area -->
-              <rect id="zone-F" class="map-zone" x="510" y="355" width="185" height="120"
-                    rx="6" data-zone="F" cursor="pointer"/>
-              <text x="603" y="408" text-anchor="middle" fill="white" font-size="13" font-weight="bold"
-                    font-family="sans-serif" pointer-events="none">Zone F</text>
-              <text x="603" y="425" text-anchor="middle" fill="white" font-size="10"
-                    font-family="sans-serif" pointer-events="none">Industrial Area</text>
-              <text id="zone-F-pct" x="603" y="445" text-anchor="middle" fill="white" font-size="12"
-                    font-family="sans-serif" pointer-events="none" font-weight="bold">44%</text>
-
-              <!-- Zone connector (drainage lines) -->
-              <line x1="330" y1="225" x2="510" y2="225" stroke="#74b9ff" stroke-width="2" stroke-dasharray="4,3" opacity="0.5"/>
-              <line x1="230" y1="295" x2="230" y2="355" stroke="#74b9ff" stroke-width="2" stroke-dasharray="4,3" opacity="0.5"/>
-              <line x1="603" y1="295" x2="603" y2="355" stroke="#74b9ff" stroke-width="2" stroke-dasharray="4,3" opacity="0.5"/>
-
-              <!-- Shelter icon -->
-              <text x="360" y="130" fill="#a8e6cf" font-size="14" font-family="sans-serif">🏥 Emergency Shelter</text>
-
-              <!-- Drainage labels -->
-              <text x="122" y="260" fill="#74b9ff" font-size="8" font-family="sans-serif" opacity="0.7" writing-mode="tb">Drain</text>
-              <text x="357" y="260" fill="#74b9ff" font-size="8" font-family="sans-serif" opacity="0.7" writing-mode="tb">Drain</text>
-
-            </svg>
-          </div>
-        </div><!-- /map-card -->
-
-      </div><!-- /left-panel -->
-
-      <!-- RIGHT: DRAINAGE + ALERTS + ZONES -->
-      <div class="right-panel">
 
         <!-- DRAINAGE CAPACITY -->
-        <div class="drainage-card">
-          <h3 class="card-title">🚰 Drainage Capacity</h3>
+        <div class="control-card drainage-control">
+          <div class="control-header">
+            <h3>🚿 Drainage Capacity</h3>
+            <span class="formula-tag" title="Flood Risk = Rainfall Factor + Drainage Load Factor + Zone Vulnerability">
+              Rain + Drainage = Flood Risk
+            </span>
+          </div>
           <div class="drainage-stats">
-            <div class="ds-item">
-              <span class="ds-label">Available Capacity</span>
-              <span class="ds-value" id="drain-available">65%</span>
+            <div class="drain-row">
+              <span class="drain-label">Available Capacity</span>
+              <div class="drain-bar-wrap">
+                <div class="drain-bar capacity-bar" id="capacityBar"></div>
+              </div>
+              <span class="drain-pct" id="capacityPct">65%</span>
             </div>
-            <div class="ds-item">
-              <span class="ds-label">Current Load</span>
-              <span class="ds-value highlight" id="drain-load">42%</span>
-            </div>
-            <div class="ds-item">
-              <span class="ds-label">Status</span>
-              <span class="ds-value status-tag" id="drain-status">Normal</span>
+            <div class="drain-row">
+              <span class="drain-label">Current Load</span>
+              <div class="drain-bar-wrap">
+                <div class="drain-bar load-bar" id="loadBar"></div>
+              </div>
+              <span class="drain-pct" id="loadPct">42%</span>
             </div>
           </div>
-          <div class="drain-bar-wrap">
-            <div class="drain-bar-bg">
-              <div class="drain-bar-fill" id="drain-bar-fill"></div>
-            </div>
-            <span class="drain-bar-label">Drainage Load</span>
-          </div>
-          <p class="coupling-note">⚡ <strong>Rain + Drainage = Flood Risk</strong> — both factors drive the assessment.</p>
-        </div>
-
-        <!-- ALERT PANEL -->
-        <div class="alert-card" id="alerts-section">
-          <h3 class="card-title">🔔 Flood Alerts</h3>
-          <div class="alert-box" id="alert-box">
-            <div class="alert-icon" id="alert-icon">🟢</div>
-            <div class="alert-text">
-              <strong id="alert-title">System Normal</strong>
-              <p id="alert-msg">Current conditions are within safe limits.</p>
-            </div>
+          <div class="drain-status-row">
+            Drainage Status: <strong id="drainStatus">Normal</strong>
           </div>
         </div>
 
-        <!-- ZONE RISK OVERVIEW -->
-        <div class="zone-overview-card">
-          <h3 class="card-title">📊 Zone Risk Overview</h3>
-          <div class="zone-cards" id="zone-cards">
+      </div>
+
+      <!-- MAP + ZONE CARDS ROW -->
+      <div class="map-zone-row">
+
+        <!-- CITY MAP -->
+        <div class="map-card">
+          <div class="map-header">
+            <h3>🗺️ Urban Zone Risk Map</h3>
+            <span class="map-hint">Click any zone for details</span>
+          </div>
+          <div class="map-container">
+            <svg id="cityMap" viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" class="city-svg">
+
+              <!-- Background city grid -->
+              <rect x="0" y="0" width="700" height="420" fill="#1a2a3a"/>
+
+              <!-- Grid lines (roads) -->
+              <g class="roads" stroke="#2a4060" stroke-width="1" opacity="0.6">
+                <line x1="0" y1="70" x2="700" y2="70"/>
+                <line x1="0" y1="140" x2="700" y2="140"/>
+                <line x1="0" y1="210" x2="700" y2="210"/>
+                <line x1="0" y1="280" x2="700" y2="280"/>
+                <line x1="0" y1="350" x2="700" y2="350"/>
+                <line x1="100" y1="0" x2="100" y2="420"/>
+                <line x1="200" y1="0" x2="200" y2="420"/>
+                <line x1="300" y1="0" x2="300" y2="420"/>
+                <line x1="400" y1="0" x2="400" y2="420"/>
+                <line x1="500" y1="0" x2="500" y2="420"/>
+                <line x1="600" y1="0" x2="600" y2="420"/>
+              </g>
+
+              <!-- RIVER (drainage channel) -->
+              <path d="M0 260 Q80 250 160 265 Q240 280 320 260 Q400 240 480 255 Q560 270 640 255 L700 258" 
+                    fill="none" stroke="#1e90ff" stroke-width="8" opacity="0.7"/>
+              <path d="M0 264 Q80 254 160 269 Q240 284 320 264 Q400 244 480 259 Q560 274 640 259 L700 262" 
+                    fill="none" stroke="#00bfff" stroke-width="3" opacity="0.4"/>
+              <text x="10" y="250" fill="#00bfff" font-size="9" opacity="0.8">Drainage Canal</text>
+
+              <!-- ZONE A – Ahmedabad Central -->
+              <rect id="zone-A" x="210" y="75" width="175" height="125" rx="6"
+                    class="map-zone" data-zone="A" fill="#22c55e" opacity="0.75"/>
+              <text x="297" y="128" text-anchor="middle" fill="white" font-size="12" font-weight="bold" class="zone-label" pointer-events="none">Zone A</text>
+              <text x="297" y="144" text-anchor="middle" fill="white" font-size="9" class="zone-sublabel" pointer-events="none">Ahmedabad Central</text>
+              <text id="zoneA-pct" x="297" y="160" text-anchor="middle" fill="white" font-size="11" font-weight="bold" pointer-events="none">28%</text>
+
+              <!-- ZONE B – Riverfront -->
+              <rect id="zone-B" x="210" y="215" width="175" height="100" rx="6"
+                    class="map-zone" data-zone="B" fill="#eab308" opacity="0.75"/>
+              <text x="297" y="258" text-anchor="middle" fill="white" font-size="12" font-weight="bold" class="zone-label" pointer-events="none">Zone B</text>
+              <text x="297" y="272" text-anchor="middle" fill="white" font-size="9" class="zone-sublabel" pointer-events="none">Riverfront</text>
+              <text id="zoneB-pct" x="297" y="288" text-anchor="middle" fill="white" font-size="11" font-weight="bold" pointer-events="none">45%</text>
+
+              <!-- ZONE C – East Zone -->
+              <rect id="zone-C" x="400" y="75" width="160" height="150" rx="6"
+                    class="map-zone" data-zone="C" fill="#f97316" opacity="0.75"/>
+              <text x="480" y="143" text-anchor="middle" fill="white" font-size="12" font-weight="bold" class="zone-label" pointer-events="none">Zone C</text>
+              <text x="480" y="158" text-anchor="middle" fill="white" font-size="9" class="zone-sublabel" pointer-events="none">East Zone</text>
+              <text id="zoneC-pct" x="480" y="174" text-anchor="middle" fill="white" font-size="11" font-weight="bold" pointer-events="none">62%</text>
+
+              <!-- ZONE D – West Zone -->
+              <rect id="zone-D" x="30" y="75" width="160" height="150" rx="6"
+                    class="map-zone" data-zone="D" fill="#22c55e" opacity="0.75"/>
+              <text x="110" y="143" text-anchor="middle" fill="white" font-size="12" font-weight="bold" class="zone-label" pointer-events="none">Zone D</text>
+              <text x="110" y="158" text-anchor="middle" fill="white" font-size="9" class="zone-sublabel" pointer-events="none">West Zone</text>
+              <text id="zoneD-pct" x="110" y="174" text-anchor="middle" fill="white" font-size="11" font-weight="bold" pointer-events="none">22%</text>
+
+              <!-- ZONE E – Low-Lying Area -->
+              <rect id="zone-E" x="400" y="240" width="160" height="120" rx="6"
+                    class="map-zone" data-zone="E" fill="#ef4444" opacity="0.75"/>
+              <text x="480" y="292" text-anchor="middle" fill="white" font-size="12" font-weight="bold" class="zone-label" pointer-events="none">Zone E</text>
+              <text x="480" y="307" text-anchor="middle" fill="white" font-size="9" class="zone-sublabel" pointer-events="none">Low-Lying Area</text>
+              <text id="zoneE-pct" x="480" y="322" text-anchor="middle" fill="white" font-size="11" font-weight="bold" pointer-events="none">78%</text>
+
+              <!-- ZONE F – Industrial Area -->
+              <rect id="zone-F" x="30" y="240" width="160" height="120" rx="6"
+                    class="map-zone" data-zone="F" fill="#eab308" opacity="0.75"/>
+              <text x="110" y="292" text-anchor="middle" fill="white" font-size="12" font-weight="bold" class="zone-label" pointer-events="none">Zone F</text>
+              <text x="110" y="307" text-anchor="middle" fill="white" font-size="9" class="zone-sublabel" pointer-events="none">Industrial Area</text>
+              <text id="zoneF-pct" x="110" y="322" text-anchor="middle" fill="white" font-size="11" font-weight="bold" pointer-events="none">48%</text>
+
+              <!-- Road labels -->
+              <text x="350" y="67" text-anchor="middle" fill="#7099bb" font-size="8">NH-48 Main Corridor</text>
+              <text x="350" y="137" text-anchor="middle" fill="#7099bb" font-size="8">Ring Road</text>
+              <text x="350" y="207" text-anchor="middle" fill="#7099bb" font-size="8">Canal Road</text>
+              <text x="350" y="345" text-anchor="middle" fill="#7099bb" font-size="8">South Bypass</text>
+
+              <!-- Map labels -->
+              <text x="210" y="15" fill="#94a3b8" font-size="9">◎ Emergency Shelter (Zone A)</text>
+              <text x="450" y="15" fill="#94a3b8" font-size="9">◎ Hospital (Zone C)</text>
+              <text x="40" y="410" fill="#94a3b8" font-size="9">◎ Fire Station (Zone D)</text>
+              <text x="450" y="410" fill="#94a3b8" font-size="9">◎ Relief Camp (Zone F)</text>
+
+            </svg>
+
+            <!-- MAP LEGEND -->
+            <div class="map-legend">
+              <div class="legend-title">Risk Level</div>
+              <div class="legend-item"><span class="leg-color" style="background:#22c55e"></span>Low (0–30%)</div>
+              <div class="legend-item"><span class="leg-color" style="background:#eab308"></span>Moderate (31–60%)</div>
+              <div class="legend-item"><span class="leg-color" style="background:#f97316"></span>High (61–80%)</div>
+              <div class="legend-item"><span class="leg-color" style="background:#ef4444"></span>Critical (81–100%)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ZONE RISK CARDS -->
+        <div class="zone-cards-panel">
+          <h3 class="zone-panel-title">Zone Risk Overview</h3>
+          <div id="zoneCardsList" class="zone-cards-list">
             <!-- Populated by JS -->
           </div>
         </div>
 
-      </div><!-- /right-panel -->
-    </div><!-- /main-grid -->
+      </div>
 
-    <!-- STATISTICS BAR -->
-    <div class="stats-bar" id="stats-bar">
-      <div class="stat-card">
-        <div class="stat-icon">🌧️</div>
-        <div class="stat-value" id="stat-rainfall">40 mm/hr</div>
-        <div class="stat-label">Avg Rainfall</div>
+      <!-- STATISTICS BAR -->
+      <div class="stats-bar" id="statsBar">
+        <div class="stat-card">
+          <div class="stat-icon">🌧️</div>
+          <div class="stat-value" id="stat-rainfall">40 mm/hr</div>
+          <div class="stat-label">Avg Rainfall</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🟠</div>
+          <div class="stat-value" id="stat-high">2</div>
+          <div class="stat-label">High Risk Zones</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔴</div>
+          <div class="stat-value" id="stat-critical">1</div>
+          <div class="stat-label">Critical Zones</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🚿</div>
+          <div class="stat-value" id="stat-drain">42%</div>
+          <div class="stat-label">Drainage Load</div>
+        </div>
+        <div class="stat-card stat-overall">
+          <div class="stat-icon">⚠️</div>
+          <div class="stat-value" id="stat-overall">MODERATE</div>
+          <div class="stat-label">Overall Risk</div>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon">🟠</div>
-        <div class="stat-value" id="stat-high">2</div>
-        <div class="stat-label">High Risk Zones</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🔴</div>
-        <div class="stat-value" id="stat-crit">0</div>
-        <div class="stat-label">Critical Zones</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🚰</div>
-        <div class="stat-value" id="stat-drain">42%</div>
-        <div class="stat-label">Drainage Load</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">⚠️</div>
-        <div class="stat-value risk-label" id="stat-overall">MODERATE</div>
-        <div class="stat-label">Overall Risk</div>
-      </div>
-    </div>
 
-    <!-- ABOUT SECTION -->
-    <div class="about-section" id="about-section">
-      <h3>ℹ️ About This System</h3>
-      <p>
-        The <strong>Urban Flood Nowcasting System</strong> by <strong>Team TECHX</strong> is a
-        prototype demonstrating how real-time rainfall intensity combined with drainage capacity
-        data can produce zone-level flood risk estimates for urban areas. This prototype uses
-        simulated data only and does not connect to any live data sources.
-      </p>
-      <div class="formula-box">
-        <strong>Risk Formula (simplified):</strong><br/>
-        Flood Risk = Rainfall Factor × 0.45 + Drainage Load Factor × 0.35 + Zone Vulnerability × 0.20
+      <!-- ALERTS SECTION -->
+      <div id="alerts-section" class="alerts-section">
+        <h3 class="alerts-title">🔔 Flood Alerts</h3>
+        <div id="alertBox" class="alert-box alert-moderate">
+          <span class="alert-icon">🟡</span>
+          <div class="alert-content">
+            <strong>Moderate Alert</strong>
+            <p>Rainfall increasing. Monitor drainage capacity.</p>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <!-- ABOUT SECTION -->
+      <div id="about-section" class="about-section">
+        <h3>About This Project</h3>
+        <p>
+          The <strong>Urban Flood Nowcasting System</strong> demonstrates how combining real-time
+          rainfall intensity data with drainage network capacity can produce actionable flood-risk
+          information for every urban zone. The core equation is simple:
+        </p>
+        <div class="formula-display">
+          Flood Risk = Rainfall Factor + Drainage Load Factor + Zone Vulnerability
+        </div>
+        <p>
+          All values shown are <em>simulated prototype data</em>. This prototype was built for
+          demonstration purposes. In a real deployment, live sensor data and GIS layers would
+          replace the simulated inputs.
+        </p>
+        <div class="team-badge">Team TECHX &nbsp;|&nbsp; Urban Flood Nowcasting System</div>
+      </div>
+
+    </main>
 
     <!-- FOOTER -->
     <footer class="footer">
-      <span>Urban Flood Nowcasting System | Team TECHX</span>
-      <span class="footer-sep">|</span>
-      <span>Prototype for Urban Flood Risk Monitoring</span>
+      <p>Urban Flood Nowcasting System &nbsp;|&nbsp; Team TECHX</p>
+      <p class="footer-sub">Prototype for Urban Flood Risk Monitoring &nbsp;·&nbsp; Simulation Data Only</p>
     </footer>
 
-  </div><!-- /dashboard-page -->
+  </section>
 
-  <!-- ═══════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════════
        ZONE DETAIL MODAL
-  ═══════════════════════════════════════════ -->
-  <div id="zone-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-zone-name">
+  ═══════════════════════════════════════════════ -->
+  <div id="zoneModal" class="modal-overlay hidden" role="dialog" aria-modal="true">
     <div class="modal-box">
-      <button class="modal-close" id="modal-close" aria-label="Close">✕ CLOSE</button>
-      <h3 class="modal-title" id="modal-zone-name">Zone Details</h3>
-      <div class="modal-grid">
-        <div class="modal-item"><span class="mi-label">Current Rainfall</span><span class="mi-val" id="m-rainfall">—</span></div>
-        <div class="modal-item"><span class="mi-label">Flood Risk</span><span class="mi-val" id="m-risk">—</span></div>
-        <div class="modal-item"><span class="mi-label">Risk Level</span><span class="mi-val" id="m-level">—</span></div>
-        <div class="modal-item"><span class="mi-label">Drainage Capacity</span><span class="mi-val" id="m-dcap">—</span></div>
-        <div class="modal-item"><span class="mi-label">Drainage Load</span><span class="mi-val" id="m-dload">—</span></div>
-        <div class="modal-item"><span class="mi-label">Flood Condition</span><span class="mi-val" id="m-flood">—</span></div>
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <h2 class="modal-title" id="modalTitle">Zone Details</h2>
+      <div class="modal-grid" id="modalGrid">
+        <!-- Populated by JS -->
       </div>
-      <div class="modal-action">
-        <span class="ma-label">Recommended Action</span>
-        <p id="m-action">—</p>
-      </div>
-      <div class="modal-route" id="modal-route">
-        <span class="route-badge">🗺️ Prototype Route Suggestion</span>
-        <div class="route-body" id="route-body"></div>
-      </div>
+      <div class="modal-alert" id="modalAlert"></div>
+      <div class="modal-route" id="modalRoute"></div>
+      <button class="btn-modal-close" id="modalCloseBtn">CLOSE</button>
     </div>
   </div>
 
-  <script src="app1.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
